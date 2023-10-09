@@ -7,16 +7,16 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.white,
         title: const Text(
           "Profile Screen",
           style: TextStyle(
-              fontSize: 30, color: Colors.blue, fontWeight: FontWeight.w900),
+              fontSize: 18, color: Colors.black, fontWeight: FontWeight.w900),
         ),
         centerTitle: true,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -125,8 +125,9 @@ class ProfileScreen extends StatelessWidget {
                         // Add your code to handle the 'Follow' button press here
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.green, // Button background color
-                        onPrimary: Colors.white, // Text color
+                        backgroundColor:
+                            Colors.green, // Button background color
+                        disabledBackgroundColor: Colors.white, // Text color
                         elevation: 3, // Button elevation
                         shape: RoundedRectangleBorder(
                           borderRadius:
@@ -154,10 +155,10 @@ class ProfileScreen extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
-                  mainAxisSpacing: 1, // 1-pixel space between rows
-                  crossAxisSpacing: 1, // 1-pixel space between columns
+                  mainAxisSpacing: 10, // 1-pixel space between rows
+                  crossAxisSpacing: 10, // 1-pixel space between columns
                 ),
-                itemCount: 9,
+                itemCount: 11,
                 itemBuilder: (context, index) {
                   // Replace this with your image widget
                   return Image.network(

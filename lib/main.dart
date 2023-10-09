@@ -1,5 +1,8 @@
-import 'package:demoproject/box_screen.dart';
-import 'package:demoproject/profile_screen.dart';
+import 'package:demoproject/views/screens/add_post_screen.dart';
+import 'package:demoproject/views/screens/home_screen.dart';
+import 'package:demoproject/views/screens/message_screen.dart';
+import 'package:demoproject/views/screens/profile_screen.dart';
+import 'package:demoproject/views/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,34 +10,87 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      home: const BottomNavigationDemo(),
+    );
+  }
+}
+
+class BottomNavigationDemo extends StatefulWidget {
+  const BottomNavigationDemo({Key? key}) : super(key: key);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _BottomNavigationDemoState createState() => _BottomNavigationDemoState();
+}
+
+class _BottomNavigationDemoState extends State<BottomNavigationDemo> {
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [
+    HomeScreen(),
+    const SearchScreen(),
+    const AddPostScreen(),
+    const MessageScreen(),
+    const ProfileScreen(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: ClipOval(
+              child: Icon(Icons.home),
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: ClipOval(
+              child: Icon(Icons.search),
+            ),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: ClipOval(
+              child: Icon(Icons.add),
+            ),
+            label: 'Add Post',
+          ),
+          BottomNavigationBarItem(
+            icon: ClipOval(
+              child: Icon(Icons.message),
+            ),
+            label: 'Messages',
+          ),
+          BottomNavigationBarItem(
+            icon: ClipOval(
+              child: Icon(Icons.person),
+            ),
+            label: 'Profile',
+          ),
+        ],
+        type:
+            BottomNavigationBarType.fixed, // Fixed type to prevent moving icons
+        selectedItemColor: Colors.black, // Selected item color
+        unselectedItemColor: Colors.grey, // Unselected item color
+        showUnselectedLabels: true, // Show labels for unselected items
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
-      home: const ProfileScreen(),
     );
   }
 }
