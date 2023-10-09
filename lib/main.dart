@@ -1,6 +1,7 @@
 import 'package:demoproject/views/screens/add_post_screen.dart';
 import 'package:demoproject/views/screens/home_screen.dart';
 import 'package:demoproject/views/screens/message_screen.dart';
+import 'package:demoproject/views/screens/post_feed_screen.dart';
 import 'package:demoproject/views/screens/profile_screen.dart';
 import 'package:demoproject/views/screens/search_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo> {
     HomeScreen(),
     const SearchScreen(),
     const AddPostScreen(),
-    const MessageScreen(),
+    PostFeedScreen(),
     const ProfileScreen(),
   ];
 
