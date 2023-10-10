@@ -61,6 +61,8 @@ class HomeScreen extends StatelessWidget {
     // Add more posts here
   ];
 
+  HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

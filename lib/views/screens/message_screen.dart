@@ -5,6 +5,19 @@ class MessageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Message',
+            style: TextStyle(
+              fontFamily: 'Billabong',
+              fontSize: 20,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        body: const Center(
+          child: Text('Message Screen'),
+        ));
   }
 }

@@ -17,24 +17,24 @@ class _CommentScreenState extends State<CommentScreen> {
   late Future<List<Comment>> comments;
 
   @override
-  void initState() {
-    super.initState();
-    comments = fetchComments(widget.post.id);
-  }
+  // void initState() {
+  //   super.initState();
+  //   comments = fetchComments(widget.post.id);
+  // }
 
-  Future<List<Comment>> fetchComments(int postId) async {
-    final response = await http.get(Uri.parse(
-        'https://jsonplaceholder.typicode.com/comments?postId=$postId'));
+  // Future<List<Comment>> fetchComments(int postId) async {
+  //   final response = await http.get(Uri.parse(
+  //       'https://jsonplaceholder.typicode.com/comments?postId=$postId'));
 
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonList = json.decode(response.body);
-      List<Comment> commentList =
-          jsonList.map((json) => Comment.fromJson(json)).toList();
-      return commentList;
-    } else {
-      throw Exception('Failed to load comments');
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> jsonList = json.decode(response.body);
+  //     List<Comment> commentList =
+  //         jsonList.map((json) => Comment.fromJson(json)).toList();
+  //     return commentList;
+  //   } else {
+  //     throw Exception('Failed to load comments');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

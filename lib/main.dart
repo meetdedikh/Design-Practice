@@ -4,6 +4,7 @@ import 'package:demoproject/views/screens/message_screen.dart';
 import 'package:demoproject/views/screens/post_feed_screen.dart';
 import 'package:demoproject/views/screens/profile_screen.dart';
 import 'package:demoproject/views/screens/search_screen.dart';
+import 'package:demoproject/views/widgets/user_post_list.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,14 +12,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // ignore: use_key_in_widget_constructors
   const MyApp({Key? key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: const BottomNavigationDemo(),
+      home: BottomNavigationDemo(),
     );
   }
 }
@@ -38,7 +40,7 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo> {
     HomeScreen(),
     const SearchScreen(),
     const AddPostScreen(),
-    PostFeedScreen(),
+    const PostFeedScreen(),
     const ProfileScreen(),
   ];
 
