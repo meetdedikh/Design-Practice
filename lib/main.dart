@@ -1,26 +1,35 @@
 import 'package:demoproject/views/screens/add_post_screen.dart';
 import 'package:demoproject/views/screens/home_screen.dart';
-import 'package:demoproject/views/screens/message_screen.dart';
+import 'package:demoproject/views/screens/login_screen.dart';
 import 'package:demoproject/views/screens/post_feed_screen.dart';
 import 'package:demoproject/views/screens/profile_screen.dart';
 import 'package:demoproject/views/screens/search_screen.dart';
-import 'package:demoproject/views/widgets/user_post_list.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  final username = prefs.getString('username');
+  final password = prefs.getString('password');
+
+  runApp(MyApp(username, password));
 }
 
 class MyApp extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  const MyApp({Key? key});
+  final String? username;
+  final String? password;
+
+  MyApp(this.username, this.password);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: BottomNavigationDemo(),
+      home: (username != null && password != null)
+          ? const BottomNavigationDemo()
+          : const LoginScreen(),
     );
   }
 }
@@ -29,7 +38,6 @@ class BottomNavigationDemo extends StatefulWidget {
   const BottomNavigationDemo({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _BottomNavigationDemoState createState() => _BottomNavigationDemoState();
 }
 
@@ -87,11 +95,10 @@ class _BottomNavigationDemoState extends State<BottomNavigationDemo> {
             label: 'Profile',
           ),
         ],
-        type:
-            BottomNavigationBarType.fixed, // Fixed type to prevent moving icons
-        selectedItemColor: Colors.black, // Selected item color
-        unselectedItemColor: Colors.grey, // Unselected item color
-        showUnselectedLabels: true, // Show labels for unselected items
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        showUnselectedLabels: true,
         selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );

@@ -1,4 +1,6 @@
+import 'package:demoproject/views/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key});
@@ -15,6 +17,14 @@ class ProfileScreen extends StatelessWidget {
             color: Colors.white,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.exit_to_app),
+            onPressed: () {
+              _showLogoutConfirmationDialog(context);
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -173,6 +183,47 @@ class ProfileScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton.icon(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.cancel),
+              label: const Text('Cancel'),
+            ),
+            TextButton.icon(
+              onPressed: () {
+                _logout(context);
+              },
+              icon: const Icon(Icons.exit_to_app),
+              label: const Text('Logout'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _logout(BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('username');
+    await prefs.remove('password');
+
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) => const LoginScreen(),
       ),
     );
   }
